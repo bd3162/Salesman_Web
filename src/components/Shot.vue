@@ -90,6 +90,22 @@
                                             if (response.data["member"]) {
                                                 // 数据库中有数据，是会员
                                                 this.$store.dispatch('changeMember', true);
+
+                                                //获取当前时间，转化成unix时间戳
+                                                var time=Long.toString(System.currentTimeMillis()/1000);
+
+                                                //发送后台，准备获取推荐
+                                                this.$axios({
+                                                    method: 'POST',
+                                                    url: 'http://haoxipeng.chinacloudapp.cn/scrm-1.0/rest/marketing/notify',
+                                                    data: this.qs.stringify({
+                                                        "userId": this.$store.getters.showFaceid,
+                                                        "isOld": 1,
+                                                        "captureTime": time
+                                                    })
+                                                })
+                                                    .then(console.log("准备获取推荐"));
+
                                                 console.log("Already a member.");
                                             }
                                             // 查看用户购物行为分析

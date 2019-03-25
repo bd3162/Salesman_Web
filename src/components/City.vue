@@ -99,7 +99,6 @@
                     }, {retry: 4, retryDelay: 1000})
                     .then(response => {
 
-
                         switch(response.data.customer.city){
                             case "Gansu": cityName="甘肃"; break;
                             case  "Hubei" : cityName="湖北"; break;
@@ -115,7 +114,6 @@
                         console.log( option.series[1].data[0].name);
                         myChart.setOption(option);
                     });
-
 
             }
         }
