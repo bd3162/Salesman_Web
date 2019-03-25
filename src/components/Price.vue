@@ -22,7 +22,7 @@
             drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 let myPriceChart = echarts.init(document.getElementById('myPriceCharts'));
-               // myPriceChart.showLoading();
+                myPriceChart.showLoading();
 
                 var option = {
                     title : {
@@ -58,18 +58,6 @@
                                     labelLine:{
                                         show:true
                                     },
-
-                              /*      color: new echarts.graphic.RadialGradient(
-                                        0, 1, 1.8, [{
-                                            offset: 0.35,
-                                            color: 'rgba(46, 217, 12, 1)'
-                                        }, {
-                                            offset: 1,
-                                            color: 'rgba(0, 0, 0, 0)'
-                                        }], false),
-                                    borderType: 'solid',
-                                    borderColor: '#ccc',
-                                    borderWidth: 2*/
                                 },
                                 emphasis: {
                                     shadowBlur: 10,
@@ -109,7 +97,48 @@
                    // color: ['#60acfc' ,'#32d3eb','#5bc49f']
                 };
 
-                myPriceChart.setOption(option);
+                var data=[];
+                var priceRegion=[];
+
+                console.log(this.$store.getters.showFaceid);
+
+                let param={
+                    "userId":this.$store.getters.showFaceid,
+                    "statisDimens": "price",
+                    "subNum":4,
+                };
+
+                this.$axios.post('https://haoxipeng.chinacloudapp.cn/scrm-1.0/rest/report/person',param,{retry:4,retryDelay:1000 })
+                    .then(response => {
+
+                        if (response.data['msgDesc'] == "Success") {
+
+                            var j=0;
+                            for(var i=0;i<4;i++){
+                                console.log(response.data.data.priceSalesList[0][i].endPrice);
+
+                                if(response.data.data.priceSalesList[0][i].endPrice && j <3){
+                                    priceRegion[j]= response.data.data.priceSalesList[0][i].startPrice + "-"+response.data.data.priceSalesList[0][i].endPrice + "元";
+                                    data[j]= {value: response.data.data.priceSalesList[0][i].salesCount, name: priceRegion[j]} ;
+                                    j++;
+                                }
+                            }
+                            console.log(priceRegion);
+                            console.log(data);
+
+                            myPriceChart.hideLoading();
+                            option.series[0].data=data;
+                            option.legend.data=priceRegion;
+
+                            console.log(option);
+                            myPriceChart.setOption(option);
+                        }else {
+                            console.log("数据未获取到")
+                        }
+
+
+                    })
+
             }
         }
 

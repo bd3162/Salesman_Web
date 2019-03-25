@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
     export default {
         name: "Shot",
         data () {
@@ -46,10 +47,13 @@
             shot: function () {
                 this.context.drawImage(this.video, 0, 0, 320, 240);
                 let dataURL = this.canvas.toDataURL("screenshot/png");
+
+                this.$store.dispatch('changeImg',dataURL);
+                console.log(this.$store.getters.showImg);
                 return dataURL;
             },
             snap: function () {
-                console.log("yaopaizhaole");
+
                 for (let i = 0; i < 5; i++) {
                     // 半秒钟拍一次照片并传到后台
                     // setTimeout(() => {
@@ -92,9 +96,9 @@
                                             this.$store.dispatch('changeStep', 2)
 
                                         })
-                                        .catch(error => {
+                                        /*.catch(error => {
                                             console.log("Get Verif request error.");
-                                        })
+                                        })*/
                                 }
                                 else {
                                     // 图片还没传完

@@ -22,7 +22,7 @@
             drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 let myBrandChart = echarts.init(document.getElementById('myBrandChart'));
-              //  myBrandChart.showLoading();
+                myBrandChart.showLoading();
 
                 var option = {
                     title: {
@@ -46,13 +46,13 @@
                     },
                     yAxis: {
                         type: 'category',
-                        data: ['巴西','印尼','美国','印度','中国']
+                        data: []
                     },
                     series: [
                         {
                             name: '2012年',
                             type: 'bar',
-                            data: [193, 234, 310, 121, 134],
+                            data:[ ],
                             itemStyle:{
                                 emphasis: {
                                     barBorderRadius: 7
@@ -72,8 +72,45 @@
                         }
                     ]
                 };
-                console.log(option);
-                myBrandChart.setOption(option);
+
+                console.log(this.$store.getters.showFaceid);
+
+                var data=[];
+                var brand=[];
+                let param={
+                    "userId":this.$store.getters.showFaceid,
+                    "statisDimens": "brand",
+                    "subNum":6,
+                };
+
+                this.$axios.post('https://haoxipeng.chinacloudapp.cn/scrm-1.0/rest/report/person',param,{retry:4,retryDelay:1000 })
+                    .then(response => {
+
+                        if (response.data['msgDesc'] == "Success") {
+                            var j=0;
+                            for(var i=0;i<6;i++){
+                                if(response.data.data.brandSalesList[0][i].brand == "null" ){
+                                    console.log("品牌为空");
+                                }else if (j < 5){
+                                    data[j++]=response.data.data.brandSalesList[0][i].salesCount;
+                                    brand.push(response.data.data.brandSalesList[0][i].brand);
+                                }
+                            }
+
+                            myBrandChart.hideLoading();
+                            option.series[0].data=data;
+                            option.yAxis.data=brand;
+
+                            console.log("数据"+data);
+                            console.log(option);
+                            myBrandChart.setOption(option);
+                        }else {
+                            console.log("数据未获取到")
+                        }
+
+
+                    })
+
             }
         }
 

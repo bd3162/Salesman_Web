@@ -9,7 +9,8 @@ export default new Vuex.Store({
         // 1: take a shot ;
         // 2. salesman view
         member:true,
-        face_id : '',
+        face_id : "A1T7EHCMZ92TKC",
+        img:' '
     },
     getters: {
         // each component can access state via getters
@@ -19,6 +20,9 @@ export default new Vuex.Store({
         showFaceid (state) {
             return state.face_id;
         },
+        showImg(state){
+            return state.img;
+        }
     },
     mutations: {
         // handle the state
@@ -31,6 +35,9 @@ export default new Vuex.Store({
         CHANGE_MEMBER (state, membered) {
             state.member = membered;
         },
+        CHANGE_IMG(state,img){
+            state.img=img;
+        }
     },
     actions: {
         // commit state changes
@@ -43,7 +50,9 @@ export default new Vuex.Store({
         changeMember (context, membered) {
             context.commit('CHANGE_MEMBER', membered)
         },
-
+        changeImg(context,img){
+            context.commit('CHANGE_IMG',img);
+        }
 
     }
 })

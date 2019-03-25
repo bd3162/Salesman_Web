@@ -20,7 +20,7 @@
             drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 let myProductChart = echarts.init(document.getElementById('myProductCharts'));
-             //   myProductChart.showLoading();
+                myProductChart.showLoading();
 
                 var option = {
                     title: {
@@ -44,24 +44,79 @@
                     },
                     yAxis: {
                         type: 'category',
-                        data: ['巴西', '印尼', '美国', '印度', '中国']
+                        data: []
                     },
                     series: [
                         {
                             name: '2012年',
                             type: 'bar',
-                            data: [193, 234, 310, 121, 134],
+                            data: [],
                             itemStyle:{
+                                emphasis: {
+                                    barBorderRadius: 7
+                                },
+                                normal:{
+                                    barBorderRadius: 7,
+                                    color :new echarts.graphic.LinearGradient(
+                                        0, 0, 1, 0,
+                                        [
+                                            {offset: 0, color: '#4e98e6'},
+                                            {offset: 1, color: '#37BBF8'}
+
+                                        ]
+                                    ),
+                                }
+                            },
+                           /* itemStyle:{
                                 normal:{
                                     color:'#ff7d15',
                                     barBorderRadius:2, //圆角半径
 
                                 }
-                            },
+                            },*/
                         }
                     ]
                 };
-                myProductChart.setOption(option);
+
+
+                var data=[];
+                var product=[];
+                let param={
+                    "userId":this.$store.getters.showFaceid,
+                    "statisDimens": "product",
+                    "subNum":6,
+                };
+
+                this.$axios.post('https://haoxipeng.chinacloudapp.cn/scrm-1.0/rest/report/person',param,{retry:4,retryDelay:1000 })
+                    .then(response => {
+
+                        if (response.data['msgDesc'] == "Success") {
+
+                            var j=0;
+                            for(var i=0;i<6;i++) {
+                                if (response.data.data.productSalesList[0][i].product == "null") {
+                                    console.log("产品为空");
+                                } else if (j < 5) {
+                                    data[j++] = response.data.data.productSalesList[0][i].salesCount;
+                                    product.push(response.data.data.productSalesList[0][i].product.substr(0, 10) + "...");
+                                }
+                            }
+
+
+                            myProductChart.hideLoading();
+
+                            option.series[0].data=data;
+                            option.yAxis.data=product;
+
+                            console.log(option);
+                            myProductChart.setOption(option);
+                        }else {
+                            console.log("数据未获取到")
+                        }
+
+
+                    })
+
             }
         }
     }
