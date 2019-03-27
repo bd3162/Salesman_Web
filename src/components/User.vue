@@ -1,7 +1,7 @@
 <template>
     <div id="user">
         <!--一个用户需要展示的信息 推荐+图表-->
-        <Recommentions></Recommentions>
+        <Recomm></Recomm>
         <Profile></Profile>
 
     </div>
@@ -17,7 +17,7 @@
         name: "User",
         components: {
             Profile,
-            Recommentions,
+            Recomm: Recommentions,
         }
     }
 </script>

@@ -32,7 +32,7 @@ Vue.prototype.$axios = axios;   //全局注册，使用方法为:this.$axios
 Vue.prototype.qs = qs;       //全局注册，使用方法为:this.qs
 
 
-axios.defaults.baseURL = 'https://haoxipeng.chinacloudapp.cn/scrm-1.0';
+axios.defaults.baseURL = 'https://wsw.chinanorth.cloudapp.chinacloudapi.cn/scrm-1.0';
 
 //main.js设置全局的请求次数，请求的间隙
 axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {

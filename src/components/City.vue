@@ -91,7 +91,7 @@
                 };
 
                 var cityName=" ";
-                this.$axios.get('https://haoxipeng.chinacloudapp.cn/scrm-1.0/customer/selectById',
+                this.$axios.get('https://wsw.chinanorth.cloudapp.chinacloudapi.cn/scrm-1.0/customer/selectById',
                     {
                         params: {
                             user_id: this.$store.getters.showFaceid,

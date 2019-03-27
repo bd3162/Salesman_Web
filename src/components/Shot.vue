@@ -97,7 +97,7 @@
                                                 //发送后台，准备获取推荐
                                                 this.$axios({
                                                     method: 'POST',
-                                                    url: 'http://haoxipeng.chinacloudapp.cn/scrm-1.0/rest/marketing/notify',
+                                                    url: 'https://wsw.chinanorth.cloudapp.chinacloudapi.cn/scrm-1.0/rest/marketing/notify',
                                                     data: this.qs.stringify({
                                                         "userId": this.$store.getters.showFaceid,
                                                         "isOld": 1,

@@ -5,7 +5,7 @@
         </el-row>
         <el-row type="flex"  justify="center">
             <el-col :span="12">
-                <City></City>
+             <Category></Category>
             </el-col>
             <el-col :span="12" >
                 <City></City>
@@ -21,12 +21,16 @@
     import Tables from "./Tables";
     import City from "./City";
     import Brand from "./Brand";
+    import Category from "./Category";
+
     export default {
         name: "Profile",
         components: {
+            Category,
             Brand,
             Tables,
             City,
+
         }
     }
 </script>

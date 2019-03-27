@@ -87,7 +87,7 @@
                     "subNum":6,
                 };
 
-                this.$axios.post('https://haoxipeng.chinacloudapp.cn/scrm-1.0/rest/report/person',param,{retry:4,retryDelay:1000 })
+                this.$axios.post('https://wsw.chinanorth.cloudapp.chinacloudapi.cn//scrm-1.0/rest/report/person',param,{retry:4,retryDelay:1000 })
                     .then(response => {
 
                         if (response.data['msgDesc'] == "Success") {

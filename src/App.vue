@@ -3,9 +3,6 @@
     <el-container  class="container" direction="vertical">
       <headerNav></headerNav>
       <el-container>
-       <!-- <el-aside width="28%">
-          <sider-nav></sider-nav>
-        </el-aside>-->
         <el-main>
             <router-view/>
         </el-main>
