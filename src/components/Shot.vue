@@ -91,7 +91,7 @@
                                                 // 数据库中有数据，是会员
                                                 this.$store.dispatch('changeMember', true);
 
-                                                //获取当前时间，转化成unix时间戳
+                                              /*  //获取当前时间，转化成unix时间戳
                                                 var time=Long.toString(System.currentTimeMillis()/1000);
 
                                                 //发送后台，准备获取推荐
@@ -104,7 +104,7 @@
                                                         "captureTime": time
                                                     })
                                                 })
-                                                    .then(console.log("准备获取推荐"));
+                                                    .then(console.log("准备获取推荐"));*/
 
                                                 console.log("Already a member.");
                                             }

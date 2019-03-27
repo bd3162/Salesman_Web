@@ -11,7 +11,7 @@
         <el-button @click="clear" type="danger" icon="el-icon-delete" circle></el-button>
       </el-form-item>&ndash;&gt;
     </el-form>-->
-    <div id="myChart3" :style="{width: '600px', height: '600px'}"></div>
+    <div id="myChart3" :style="{width: '600px', height: '450px'}"></div>
   </div>
 </template>
 
@@ -28,7 +28,7 @@
             drawForce (data) {
                 let option = {
                     legend: {
-                        x: 'left',//图例位置
+                       // x: 'left',//图例位置
                         //图例的名称
                         //此处的数据必须和关系网类别中name相对应
                         data: data.categories.map(function (a) {
