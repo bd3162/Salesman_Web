@@ -40,8 +40,7 @@
             this.canvas = document.getElementById('canvas');
             this.context = this.canvas.getContext('2d');
             this.video = document.getElementById('video');
-            this.start();
-
+            this.start()
         },
         methods: {
             shot: function () {
@@ -54,25 +53,25 @@
             },
             snap: function () {
 
-                for (let i = 0; i < 5; i++) {
+              //  for (let i = 0; i < 5; i++) {
                     // 半秒钟拍一次照片并传到后台
                     // setTimeout(() => {
                     //     let base = this.shot();
                     // }, 500);
+                console.log("what")
                     let base = this.shot();
                     this.$axios({
                         method: 'POST',
-                        url: 'http://42.159.104.30:80/crm32/multiImage/sendBase',
+                        url: 'http://42.159.104.30:8001/uploadOne',
                         //qs.stringify()将对象 序列化成URL形式，以&进行拼接
                         //用于set请求
                         data: this.qs.stringify({
                             bases: base,
-                            name: i,
+                            name: 1,
                         })
                     })
                         .then(response => {
                             console.log(response.data);
-                            if (response.data.success == true) {
                                 if (response.data.finish == true) {
                                     // 已经取到人脸识别faceID
                                     console.log("FACEID:" + response.data.faceid);
@@ -80,7 +79,7 @@
 
                                     // 验证是否为会员并取得验证码
                                     this.$axios({
-                                        methods: 'POST',
+                                        method: 'POST',
                                         url: '/cashier/getVerif',
                                         data: this.qs.stringify({
                                             user_id: response.data.faceid,
@@ -107,39 +106,33 @@
                                                     .then(console.log("准备获取推荐"));*/
 
                                                 console.log("Already a member.");
+
+                                                // 查看用户购物行为分析
+                                                this.$store.dispatch('changeStep', 2);
+                                                console.log("跳转至第二步，获取推荐"+ this.$store.getters.showStep);
                                             }
-                                            // 查看用户购物行为分析
-                                            this.$store.dispatch('changeStep', 2)
 
                                         })
-                                        /*.catch(error => {
-                                            console.log("Get Verif request error.");
-                                        })*/
+                                        .catch(error => {
+                                            console.log("非会员");
+                                        })
                                 }
                                 else {
                                     // 图片还没传完
                                     console.log("还没结束请耐心等待");
                                 }
-                            }
-                            else {
-                                console.log("图片请求失败，后台出错");
-                            }
                         })
                         .catch(error => {
                             console.log(error);
                             this.$message.error('Face Request Error......');
                         })
-                }
-
             },
             start () {
-                console.log("what")
-                setTimeout(()=>{
-                    this.snap();
-                },1000);//5秒拍一次照片
-            }
 
-        }
+                setInterval(this.snap, 5000)
+
+            }
+        },
     }
 </script>
 

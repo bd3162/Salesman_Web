@@ -88,8 +88,8 @@
 
                         if (response.data['msgDesc'] == "Success") {
                             var j=0;
-                            for(var i=0;i<6;i++){
-                                if(response.data.data.brandSalesList[0][i].brand == "null" ){
+                            for(let brand_object of response.data.data.brandSalesList[0]){
+                                if(brand_object.brand == "null" ){
                                     console.log("品牌为空");
                                 }else if (j < 5){
                                     data[j++]=response.data.data.brandSalesList[0][i].salesCount;

@@ -9,7 +9,7 @@ export default new Vuex.Store({
         // 1: take a shot ;
         // 2. salesman view
         member:true,
-        face_id : "A1T7EHCMZ92TKC",
+        face_id : "",
         img:' '
     },
     getters: {
@@ -27,7 +27,7 @@ export default new Vuex.Store({
     mutations: {
         // handle the state
         CHANGE_STEP (state, step) {
-            state.step = state;
+            state.step = step;
         },
         SET_FACE_ID (state, faceid) {
             state.face_id = faceid;
