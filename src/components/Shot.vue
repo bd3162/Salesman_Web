@@ -21,6 +21,7 @@
                 canvas: null,
                 video: null,
                 context: null,
+                interval: null, //timer variable
             }
         },
         mounted() {
@@ -48,7 +49,7 @@
                 let dataURL = this.canvas.toDataURL("screenshot/png");
 
                 this.$store.dispatch('changeImg',dataURL);
-                console.log(this.$store.getters.showImg);
+                console.log("shot successfully...");
                 return dataURL;
             },
             snap: function () {
@@ -110,6 +111,7 @@
                                                 // 查看用户购物行为分析
                                                 this.$store.dispatch('changeStep', 2);
                                                 console.log("跳转至第二步，获取推荐"+ this.$store.getters.showStep);
+                                                clearInterval(this.interval);
                                             }
 
                                         })
@@ -129,7 +131,7 @@
             },
             start () {
 
-                setInterval(this.snap, 5000)
+                this.interval = setInterval(this.snap, 5000)
 
             }
         },

@@ -24,7 +24,7 @@
 
                 var option = {
                     title: {
-                        text: '产品偏好度Top5',
+                        text: '产品偏好度',
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -93,12 +93,12 @@
                         if (response.data['msgDesc'] == "Success") {
 
                             var j=0;
-                            for(var i=0;i<6;i++) {
-                                if (response.data.data.productSalesList[0][i].product == "null") {
+                            for(let product_object of response.data.data.productSalesList[0]) {
+                                if (product_object.product == "null") {
                                     console.log("产品为空");
                                 } else if (j < 5) {
-                                    data[j++] = response.data.data.productSalesList[0][i].salesCount;
-                                    product.push(response.data.data.productSalesList[0][i].product.substr(0, 10) + "...");
+                                    data[j++] = product_object.salesCount;
+                                    product.push(product_object.product.substr(0, 10) + "...");
                                 }
                             }
 

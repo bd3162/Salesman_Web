@@ -114,12 +114,12 @@
                         if (response.data['msgDesc'] == "Success") {
 
                             var j=0;
-                            for(var i=0;i<4;i++){
-                                console.log(response.data.data.priceSalesList[0][i].endPrice);
+                            for(let price_object of response.data.data.priceSalesList[0]){
+                                console.log(price_object.endPrice);
 
-                                if(response.data.data.priceSalesList[0][i].endPrice && j <3){
-                                    priceRegion[j]= response.data.data.priceSalesList[0][i].startPrice + "-"+response.data.data.priceSalesList[0][i].endPrice + "元";
-                                    data[j]= {value: response.data.data.priceSalesList[0][i].salesCount, name: priceRegion[j]} ;
+                                if(price_object.endPrice && j <3){
+                                    priceRegion[j]= price_object.startPrice + "-"+price_object.endPrice + "元";
+                                    data[j]= {value: price_object.salesCount, name: priceRegion[j]} ;
                                     j++;
                                 }
                             }

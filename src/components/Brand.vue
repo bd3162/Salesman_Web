@@ -26,7 +26,7 @@
 
                 var option = {
                     title: {
-                        text: '品牌偏好度Top5',
+                        text: '品牌偏好度',
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -92,8 +92,8 @@
                                 if(brand_object.brand == "null" ){
                                     console.log("品牌为空");
                                 }else if (j < 5){
-                                    data[j++]=response.data.data.brandSalesList[0][i].salesCount;
-                                    brand.push(response.data.data.brandSalesList[0][i].brand);
+                                    data[j++]=brand_object.salesCount;
+                                    brand.push(brand_object.brand);
                                 }
                             }
 

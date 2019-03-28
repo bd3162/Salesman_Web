@@ -35,7 +35,7 @@
                                     <div style="padding: 14px;">
                                         <span class="show">{{object.title}}</span>
                                         <div class="bottom clearfix">
-                                            <time class="time">{{object.price }}</time>
+                                            <time class="time">{{object.price }}RMB</time>
                                         </div>
                                     </div>
                                 </el-card>
@@ -50,7 +50,7 @@
                                     <div style="padding: 14px;">
                                         <span class="show">{{object.title}}</span>
                                         <div class="bottom clearfix">
-                                            <time class="time">{{object.price }}</time>
+                                            <time class="time">{{object.price }}RMB</time>
                                         </div>
                                     </div>
                                 </el-card>
@@ -65,7 +65,7 @@
                                     <div style="padding: 14px;">
                                         <span class="show">{{object.title}}</span>
                                         <div class="bottom clearfix">
-                                            <time class="time">{{object.price }}</time>
+                                            <time class="time">{{object.price }}RMB</time>
                                         </div>
                                     </div>
                                 </el-card>
@@ -80,7 +80,7 @@
                                     <div style="padding: 14px;">
                                         <span class="show">{{object.title}}</span>
                                         <div class="bottom clearfix">
-                                            <time class="time">{{object.price }}</time>
+                                            <time class="time">{{object.price }}RMB</time>
                                         </div>
                                     </div>
                                 </el-card>
@@ -128,7 +128,7 @@ import Vue from 'vue'
 
             },
             getGender() {
-                console.log("图片的"+this.$store.getters.showImg);
+                console.log("get picture successfully.");
 
                 this.$axios.get('https://wsw.chinanorth.cloudapp.chinacloudapi.cn/scrm-1.0/customer/selectById',
                     {
